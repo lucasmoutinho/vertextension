@@ -5,11 +5,12 @@ let options = {
   iconUrl: "images/ahgora.jpg"
 };
 
-
+// On Alarm
 chrome.alarms.onAlarm.addListener(function (alarm) {
-  chrome.notifications.create(options, function (){
-    chrome.notifications.onClicked.addListener(function(){
-      chrome.tabs.create({'url':"https://www.ahgora.com.br/painel"})
-    });
-  });
+  chrome.notifications.create(options);
+});
+
+// Notifications CLick
+chrome.notifications.onClicked.addListener(function () {
+  chrome.tabs.create({ 'url': "https://www.ahgora.com.br/batidaonline" })
 });
