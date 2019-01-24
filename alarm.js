@@ -1,7 +1,7 @@
 function clickHandler(e) {
   let alarmName = 'FirstAlarm'
   chrome.alarms.create(alarmName, {
-    delayInMinutes: 0.1, periodInMinutes: 0.1
+    delayInMinutes: 0.1
   });
 }
 

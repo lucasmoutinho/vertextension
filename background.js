@@ -8,5 +8,4 @@ let options = {
 
 chrome.alarms.onAlarm.addListener(function (alarm) {
   chrome.notifications.create(options);
-  chrome.alarms.clear(alarm.name);
 });
