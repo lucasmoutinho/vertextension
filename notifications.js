@@ -7,12 +7,10 @@ let options = {
   iconUrl: "images/ahgora.jpg"
 };
 
-function notifications(){
-  chrome.notifications.create(options)
-}
-
 function clickHandler(e) {
-  setTimeout(notifications, 5000);
+  chrome.notifications.create(options)
+
+
 }
 
 // On Click

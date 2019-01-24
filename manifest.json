@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
-  "name": "VertExtension",
+  "name": "VertAlerts",
   "description": "An extension to notify users to 'hit the spot'",
-  "version": "1.0",
+  "version": "1.1",
   "author": "Lucas Moutinho and Thiago Barros",
 
   "background": {
@@ -11,7 +11,7 @@
   },
 
   "browser_action": {
-    "default_title": "VertExtension",
+    "default_title": "VertAlerts",
     "default_popup": "popup.html",
     "default_icon": {
       "16": "images/get_started16.png",
