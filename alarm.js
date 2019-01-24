@@ -16,13 +16,27 @@ function clickHandler(e) {
     let array = timeResponse.split(":")
     let todayDate = new Date(Date.now())
     let alarmTime = new Date(todayDate.getFullYear(),todayDate.getMonth(),todayDate.getDate(),array[0],array[1],0,0)
+    
     if(todayDate.getTime() > alarmTime.getTime()){
       alarmTime.setDate(alarmTime.getDate() + 1)
     }
-    let alarmName = 'FirstAlarm'
+    let alarmExitTime = new Date(alarmTime.getTime())
+    alarmExitTime.setHours(alarmTime.getHours() + 8)
+
+    console.log(alarmTime)
+    console.log(alarmExitTime)
+
+    let alarmName = 'EntranceAlarm'
+    let alarmExitName = 'ExitAlarm'
+
     chrome.alarms.create(alarmName, {
       when: alarmTime.getTime(), periodInMinutes: 1440
     });
+
+    chrome.alarms.create(alarmExitName, {
+      when: alarmExitTime.getTime(), periodInMinutes: 1440
+    });
+
     Success();
   }else{
     Failure();

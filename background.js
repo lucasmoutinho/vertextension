@@ -1,13 +1,57 @@
-let options = {
+let optionsEntrance = {
   type: "basic",
   title: "Hora de bater o ponto!",
   message: "Entre no Ahgora e bata seu ponto!",
   iconUrl: "images/ahgora.jpg"
 };
 
+let optionsLunch = {
+  type: "basic",
+  title: "Saindo para o almoço!?",
+  message: "Não esqueça de bater o ponto antes de sair!",
+  iconUrl: "images/ahgora.jpg"
+};
+
+let optionsLunchExit = {
+  type: "basic",
+  title: "Voltando do break!?",
+  message: "Aproveite e bata o ponto!",
+  iconUrl: "images/ahgora.jpg"
+};
+
+let optionsExit = {
+  type: "basic",
+  title: "O dia está acabando...",
+  message: "Não esqueça de bater o ponto na saída!",
+  iconUrl: "images/ahgora.jpg"
+};
+
+// Lunch time alarms
+
+let todayDate = new Date(Date.now())
+let lunchTime = new Date(todayDate.getFullYear(), todayDate.getMonth(), todayDate.getDate(), 12, 0, 0, 0)
+let lunchExitTime = new Date(todayDate.getFullYear(), todayDate.getMonth(), todayDate.getDate(), 14, 0, 0, 0)
+chrome.alarms.create('LunchAlarm', {
+  when: lunchTime.getTime(), periodInMinutes: 1440
+});
+chrome.alarms.create('LunchExitAlarm', {
+  when: lunchExitTime.getTime(), periodInMinutes: 1440
+});
+
 // On Alarm
 chrome.alarms.onAlarm.addListener(function (alarm) {
-  chrome.notifications.create(options);
+  if (alarm.name === 'EntranceAlarm'){
+    chrome.notifications.create(optionsEntrance);
+  }
+  else if (alarm.name === 'LunchAlarm') {
+    chrome.notifications.create(optionsLunch);
+  }
+  else if (alarm.name === 'LunchExitAlarm') {
+    chrome.notifications.create(optionsLunchExit);
+  }
+  else if (alarm.name === 'ExitAlarm') {
+    chrome.notifications.create(optionsExit);
+  }
 });
 
 // Notifications CLick
