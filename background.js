@@ -7,5 +7,9 @@ let options = {
 
 
 chrome.alarms.onAlarm.addListener(function (alarm) {
-  chrome.notifications.create(options);
+  chrome.notifications.create(options, function (){
+    chrome.notifications.onClicked.addListener(function(){
+      chrome.tabs.create({'url':"https://www.ahgora.com.br/painel"})
+    });
+  });
 });
