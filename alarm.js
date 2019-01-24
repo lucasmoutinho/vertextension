@@ -1,3 +1,15 @@
+function Success() {
+  var x = document.getElementById("snackbar");
+  x.className = "show";
+  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
+
+function Failure() {
+  var x = document.getElementById("snackbarfailure");
+  x.className = "show";
+  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
+
 function clickHandler(e) {
   let timeResponse = document.getElementById('entranceAlarm').value
   if(timeResponse){
@@ -14,6 +26,10 @@ function clickHandler(e) {
     chrome.alarms.create(alarmName, {
       when: alarmTime.getTime(), periodInMinutes: 1
     });
+    Success();
+  }else{
+    console.log("entrou")
+    Failure();
   }
 }
 
