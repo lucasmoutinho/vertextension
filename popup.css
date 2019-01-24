@@ -19,3 +19,9 @@ body {
   align-items: center;
   text-align: center;
 }
+
+.timeBlock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
