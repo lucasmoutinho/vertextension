@@ -3,31 +3,34 @@ let optionsEntrance = {
   title: "Hora de bater o ponto!",
   message: "Entre no Ahgora e bata seu ponto!",
   iconUrl: "images/ahgora.jpg",
-  imageUrl: "images/homer.jpg",
+  imageUrl: "images/start.jpg",
   requireInteraction: true
 };
 
 let optionsLunch = {
-  type: "basic",
+  type: "image",
   title: "Saindo para o almoço!?",
   message: "Não esqueça de bater o ponto antes de sair!",
   iconUrl: "images/ahgora.jpg",
+  imageUrl: "images/lunch.jpg",
   requireInteraction: true
 };
 
 let optionsLunchExit = {
-  type: "basic",
+  type: "image",
   title: "Voltando do break!?",
   message: "Aproveite e bata o ponto!",
   iconUrl: "images/ahgora.jpg",
+  imageUrl: "images/lunch.jpg",
   requireInteraction: true
 };
 
 let optionsExit = {
-  type: "basic",
+  type: "image",
   title: "O dia está acabando...",
   message: "Não esqueça de bater o ponto na saída!",
   iconUrl: "images/ahgora.jpg",
+  imageUrl: "images/lunch.jpg",
   requireInteraction: true
 };
 
