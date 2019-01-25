@@ -1,10 +1,12 @@
 function Success() {
+  // Emite uma notificação quando o horário tem entrada correta
   var x = document.getElementById("snackbar");
   x.className = "show";
   setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 }
 
 function Failure() {
+  // Emite uma notificação quando o horário tem entrada incorreta
   var x = document.getElementById("snackbarfailure");
   x.className = "show";
   setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);

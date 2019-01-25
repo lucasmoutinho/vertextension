@@ -3,28 +3,32 @@ let optionsEntrance = {
   title: "Hora de bater o ponto!",
   message: "Entre no Ahgora e bata seu ponto!",
   iconUrl: "images/ahgora.jpg",
-  imageUrl: "images/homer.jpg"
+  imageUrl: "images/homer.jpg",
+  requireInteraction: true
 };
 
 let optionsLunch = {
   type: "basic",
   title: "Saindo para o almoço!?",
   message: "Não esqueça de bater o ponto antes de sair!",
-  iconUrl: "images/ahgora.jpg"
+  iconUrl: "images/ahgora.jpg",
+  requireInteraction: true
 };
 
 let optionsLunchExit = {
   type: "basic",
   title: "Voltando do break!?",
   message: "Aproveite e bata o ponto!",
-  iconUrl: "images/ahgora.jpg"
+  iconUrl: "images/ahgora.jpg",
+  requireInteraction: true
 };
 
 let optionsExit = {
   type: "basic",
   title: "O dia está acabando...",
   message: "Não esqueça de bater o ponto na saída!",
-  iconUrl: "images/ahgora.jpg"
+  iconUrl: "images/ahgora.jpg",
+  requireInteraction: true
 };
 
 // Lunch time alarms
