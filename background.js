@@ -36,12 +36,7 @@ let optionsExit = {
 let todayDate = new Date(Date.now())
 let lunchTime = new Date(todayDate.getFullYear(), todayDate.getMonth(), todayDate.getDate(), 12, 0, 0, 0)
 let lunchExitTime = new Date(todayDate.getFullYear(), todayDate.getMonth(), todayDate.getDate(), 14, 0, 0, 0)
-chrome.alarms.create('LunchAlarm', {
-  when: lunchTime.getTime(), periodInMinutes: 1440
-});
-chrome.alarms.create('LunchExitAlarm', {
-  when: lunchExitTime.getTime(), periodInMinutes: 1440
-});
+
 
 // On Alarm
 chrome.alarms.onAlarm.addListener(function (alarm) {
