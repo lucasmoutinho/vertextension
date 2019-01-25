@@ -36,6 +36,7 @@ function clickHandler(e) {
     let lunchExitAlarmTime = new Date(todayDate.getFullYear(),todayDate.getMonth(),todayDate.getDate(),lunchExitArray[0],lunchExitArray[1],0,0)
     let exitAlarmTime = new Date(todayDate.getFullYear(),todayDate.getMonth(),todayDate.getDate(),exitArray[0], exitArray[1],0,0)
     
+    /* DESCOMENTAR NA SEGUNDA 28/01
     if(todayDate.getTime() > entranceAlarmTime.getTime()){
       entranceAlarmTime.setDate(entranceAlarmTime.getDate() + 1)
     }
@@ -51,7 +52,7 @@ function clickHandler(e) {
     if(todayDate.getTime() > exitAlarmTime.getTime()){
       exitAlarmTime.setDate(exitAlarmTime.getDate() + 1)
     }
-
+    */
     console.log(entranceAlarmTime)
     console.log(lunchAlarmTime)
     console.log(lunchExitAlarmTime)
