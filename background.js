@@ -21,7 +21,7 @@ let optionsLunchExit = {
   title: "Voltando do break!?",
   message: "Aproveite e bata o ponto!",
   iconUrl: "images/ahgora.jpg",
-  imageUrl: "images/lunch.jpg",
+  imageUrl: "images/exitlunch.jpg",
   requireInteraction: true
 };
 
@@ -30,7 +30,7 @@ let optionsExit = {
   title: "O dia está acabando...",
   message: "Não esqueça de bater o ponto na saída!",
   iconUrl: "images/ahgora.jpg",
-  imageUrl: "images/lunch.jpg",
+  imageUrl: "images/end.jpg",
   requireInteraction: true
 };
 
