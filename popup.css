@@ -3,8 +3,8 @@ body {
 }
 
 .page-container {
-  height: 20em;
-  width: 30em;
+  height: 40em;
+  width: 60em;
   border: 3px solid white;
   padding: 0.5em;
 }
@@ -22,6 +22,7 @@ body {
 
 .timeBlock {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
