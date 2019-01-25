@@ -3,8 +3,8 @@ body {
 }
 
 .page-container {
-  height: 40em;
-  width: 60em;
+  height: 35em;
+  width: 30em;
   border: 3px solid white;
   padding: 0.5em;
 }
@@ -27,6 +27,14 @@ body {
   align-items: center;
 }
 
-.button {
-  margin: 0 0.5em
+.inputBlock {
+  margin: 1em 0em;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.labelInput {
+  width: 9em;
 }

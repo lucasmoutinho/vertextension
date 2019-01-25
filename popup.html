@@ -16,14 +16,25 @@
       <h2>Ajuste as notificações para não esquecer de bater seu ponto na Vert!</h2>
       <h2>Salve seu horário de entrada...</h2>
       <div class="timeBlock">
-        <input type="time" id="EntranceAlarmInput" name="entranceTime">
-        <br>
-        <input type="time" id="LunchAlarmInput" name="LunchTime">
-        <br>
-        <input type="time" id="LunchExitAlarmInput" name="LunchExitTime">
-        <br>
-        <input type="time" id="ExitAlarmInput" name="ExitTime">
-        <button id="toggleAlarm" class="button">Submeter Alarme</button>
+        <div class="inputBlock">
+          <p class="labelInput">Entrada</p>
+          <input type="time" id="EntranceAlarmInput" name="entranceTime">
+        </div>
+        <div class="inputBlock">
+          <p class="labelInput">Saída para o almoço</p>
+          <input type="time" id="LunchAlarmInput" name="LunchTime">
+        </div>
+        <div class="inputBlock">
+          <p class="labelInput">Volta do almoço</p>
+          <input type="time" id="LunchExitAlarmInput" name="LunchExitTime">
+        </div>
+        <div class="inputBlock">
+          <p class="labelInput">Saída</p>
+          <input type="time" id="ExitAlarmInput" name="ExitTime">
+        </div>
+        <div class="inputBlock">
+          <button id="toggleAlarm">Submeter Alarme</button>
+        </div>
       </div>
     </div>
   </div>
