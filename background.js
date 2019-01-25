@@ -13,6 +13,7 @@ let optionsLunch = {
   message: "Não esqueça de bater o ponto antes de sair!",
   iconUrl: "images/ahgora.jpg",
   imageUrl: "images/lunch.jpg",
+  items: { title: "Clique aqui", message: "Agora" },
   requireInteraction: true
 };
 

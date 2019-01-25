@@ -23,14 +23,15 @@ function clickHandler(e) {
     let entranceArray = entranceTimeResponse.split(":")
     let lunchArray = lunchTimeResponse.split(":")
     let lunchExitArray = lunchExitTimeResponse.split(":")
-    let exitArray = entranceTimeResponse.split(":")
+    let exitArray = exitTimeResponse.split(":")
 
     let todayDate = new Date(Date.now())
 
-    let entranceAlarmTime = new Date(todayDate.getFullYear(),todayDate.getMonth(),todayDate.getDate(),entranceArray[0],entranceArray[1],0,0)
-    let lunchAlarmTime = new Date(todayDate.getFullYear(),todayDate.getMonth(),todayDate.getDate(),lunchArray[0],lunchArray[1],0,0)
-    let lunchExitAlarmTime = new Date(todayDate.getFullYear(),todayDate.getMonth(),todayDate.getDate(),lunchExitArray[0],lunchExitArray[1],0,0)
-    let exitAlarmTime = new Date(todayDate.getFullYear(),todayDate.getMonth(),todayDate.getDate(),exitArray[0], exitArray[1],0,0)
+    // LEMBRAR DE CORRIGIR TRANSLOCAMENTE PARA SALTAR O DOMINGO
+    let entranceAlarmTime = new Date(todayDate.getFullYear(),todayDate.getMonth(),todayDate.getDate() + 3,entranceArray[0],entranceArray[1],0,0)
+    let lunchAlarmTime = new Date(todayDate.getFullYear(),todayDate.getMonth(),todayDate.getDate() + 3,lunchArray[0],lunchArray[1],0,0)
+    let lunchExitAlarmTime = new Date(todayDate.getFullYear(),todayDate.getMonth(),todayDate.getDate() + 3,lunchExitArray[0],lunchExitArray[1],0,0)
+    let exitAlarmTime = new Date(todayDate.getFullYear(),todayDate.getMonth(),todayDate.getDate() + 3,exitArray[0], exitArray[1],0,0)
     
     if(todayDate.getTime() > entranceAlarmTime.getTime()){
       entranceAlarmTime.setDate(entranceAlarmTime.getDate() + 1)
