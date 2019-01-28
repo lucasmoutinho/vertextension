@@ -43,16 +43,17 @@ let lunchExitTime = new Date(todayDate.getFullYear(), todayDate.getMonth(), toda
 
 // On Alarm
 chrome.alarms.onAlarm.addListener(function (alarm) {
-  if (alarm.name === 'EntranceAlarm'){
+  let AlarmOptions = alarm.name.split("_")[0]
+  if (AlarmOptions === 'EntranceAlarm'){
     chrome.notifications.create(optionsEntrance);
   }
-  else if (alarm.name === 'LunchAlarm') {
+  else if (AlarmOptions === 'LunchAlarm') {
     chrome.notifications.create(optionsLunch);
   }
-  else if (alarm.name === 'LunchExitAlarm') {
+  else if (AlarmOptions === 'LunchExitAlarm') {
     chrome.notifications.create(optionsLunchExit);
   }
-  else if (alarm.name === 'ExitAlarm') {
+  else if (AlarmOptions === 'ExitAlarm') {
     chrome.notifications.create(optionsExit);
   }
 });

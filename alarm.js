@@ -12,67 +12,82 @@ function Failure() {
   setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 }
 
-function clickHandler(e) {
+function createAlarm(MomentName, TodayDate)
+{
+  // Function which creates an alarm for each moment based on the computer date
+  // Time to repeat is measured in minuets 
+  // So 60 minutes per hour times 24 hours per day times 7 days give us a week
+  const INTERVAL_TO_REPEAT = 24*60*7
+  const NUMBER_OF_DAYS_OF_THE_WEEK = 7
+  const FRIDAY = 0
+  const SUNDAY = 0
+
+
+  let InputName = MomentName + "AlarmInput" 
+  let TimeResponse = document.getElementById(InputName).value
+
+  let HourAndMinute = TimeResponse.split(":")
+
+  let AlarmDate = new Date(TodayDate.getFullYear(),TodayDate.getMonth(),TodayDate.getDate(), HourAndMinute[0], HourAndMinute[1],0,0)
+
+  if( TodayDate.getTime() > AlarmDate.getTime() ){
+    AlarmDate.setDate( AlarmDate.getDate() + 1 )
+  }
+
+  var count = 0;
+  while (count < NUMBER_OF_DAYS_OF_THE_WEEK) {
+
+    let AlarmName = MomentName + 'Alarm' + "_" + count
+
+    AlarmDate.setDate( AlarmDate.getDay() + 1)
+
+    if ( AlarmDate.getDay() != SUNDAY && AlarmDate.getDay() != SATURDAY ) { // Skip weekends      
+      chrome.alarms.create( AlarmName, {
+        when: AlarmDate.getTime(), periodInMinutes: INTERVAL_TO_REPEAT
+      });
+      console.log(AlarmDate)
+    }
+
+    count += 1 
+  }
+
+
+}
+
+function areEntriesValid()
+{
   let entranceTimeResponse = document.getElementById('EntranceAlarmInput').value
   let lunchTimeResponse = document.getElementById('LunchAlarmInput').value
   let lunchExitTimeResponse = document.getElementById('LunchExitAlarmInput').value
   let exitTimeResponse = document.getElementById('ExitAlarmInput').value
 
   // Se qualquer uma das entradas for nula, o comportamento não é executado
-  if( entranceTimeResponse && lunchTimeResponse && lunchExitTimeResponse && exitTimeResponse){
-    let entranceArray = entranceTimeResponse.split(":")
-    let lunchArray = lunchTimeResponse.split(":")
-    let lunchExitArray = lunchExitTimeResponse.split(":")
-    let exitArray = exitTimeResponse.split(":")
+  if( entranceTimeResponse && lunchTimeResponse && lunchExitTimeResponse && exitTimeResponse ) {
+    return true
+  } else {
+    return false
+  }
+}
 
-    let todayDate = new Date(Date.now())
 
-    let entranceAlarmTime = new Date(todayDate.getFullYear(),todayDate.getMonth(),todayDate.getDate(),entranceArray[0],entranceArray[1],0,0)
-    let lunchAlarmTime = new Date(todayDate.getFullYear(),todayDate.getMonth(),todayDate.getDate(),lunchArray[0],lunchArray[1],0,0)
-    let lunchExitAlarmTime = new Date(todayDate.getFullYear(),todayDate.getMonth(),todayDate.getDate(),lunchExitArray[0],lunchExitArray[1],0,0)
-    let exitAlarmTime = new Date(todayDate.getFullYear(),todayDate.getMonth(),todayDate.getDate(),exitArray[0], exitArray[1],0,0)
-    
-    if(todayDate.getTime() > entranceAlarmTime.getTime()){
-      entranceAlarmTime.setDate(entranceAlarmTime.getDate() + 1)
-    }
+function clickHandler(e) {
 
-    if(todayDate.getTime() > lunchAlarmTime.getTime()){
-      lunchAlarmTime.setDate(lunchAlarmTime.getDate() + 1)
-    }
+  let TodayDate = new Date(Date.now())
 
-    if(todayDate.getTime() > lunchExitAlarmTime.getTime()){
-      lunchExitAlarmTime.setDate(lunchExitAlarmTime.getDate() + 1)
-    }
-
-    if(todayDate.getTime() > exitAlarmTime.getTime()){
-      exitAlarmTime.setDate(exitAlarmTime.getDate() + 1)
-    }
-
-    console.log(entranceAlarmTime)
-    console.log(lunchAlarmTime)
-    console.log(lunchExitAlarmTime)
-    console.log(exitAlarmTime)
-
-    chrome.alarms.create( entranceAlarmName, {
-      when: entranceAlarmTime.getTime(), periodInMinutes: 1440
-    });
-
-    chrome.alarms.create( exitAlarmName, {
-      when: exitAlarmTime.getTime(), periodInMinutes: 1440
-    });
-
-    chrome.alarms.create( lunchAlarmName, {
-      when: lunchAlarmTime.getTime(), periodInMinutes: 1440
-    });
-
-    chrome.alarms.create(lunchExitAlarmName, {
-      when: lunchExitAlarmTime.getTime(), periodInMinutes: 1440
-    });
+  if ( areEntriesValid() ){
+    createAlarm("Entrance", TodayDate)
+    createAlarm("Lunch", TodayDate)
+    createAlarm("LunchExit", TodayDate)
+    createAlarm("Exit", TodayDate)
 
     Success();
-  }else{
+  } else {
     Failure();
   }
+
+/*
+  
+*/
 }
 
 function setInputValues(alarmName, inputName){
@@ -95,10 +110,10 @@ function setInputValues(alarmName, inputName){
 
 // On Click
 
-let entranceAlarmName = 'EntranceAlarm'
-let lunchAlarmName = 'LunchAlarm'
-let lunchExitAlarmName = 'LunchExitAlarm'
-let exitAlarmName = 'ExitAlarm'
+let entranceAlarmName = 'EntranceAlarm_0'
+let lunchAlarmName = 'LunchAlarm_0'
+let lunchExitAlarmName = 'LunchExitAlarm_0'
+let exitAlarmName = 'ExitAlarm_0'
 
 document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('toggleAlarm').addEventListener('click', clickHandler);
