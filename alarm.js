@@ -39,23 +39,38 @@ function createAlarm(MomentName, TodayDate)
 
 }
 
+function areEntriesValid()
+{
+  let entranceTimeResponse = document.getElementById('EntranceAlarmInput').value
+  let lunchTimeResponse = document.getElementById('LunchAlarmInput').value
+  let lunchExitTimeResponse = document.getElementById('LunchExitAlarmInput').value
+  let exitTimeResponse = document.getElementById('ExitAlarmInput').value
+
+  // Se qualquer uma das entradas for nula, o comportamento não é executado
+  if( entranceTimeResponse && lunchTimeResponse && lunchExitTimeResponse && exitTimeResponse ) {
+    return true
+  } else {
+    return false
+  }
+}
+
 function clickHandler(e) {
 
   let TodayDate = new Date(Date.now())
 
-  createAlarm("Entrance", TodayDate)
-  createAlarm("Lunch", TodayDate)
-  createAlarm("LunchExit", TodayDate)
-  createAlarm("Exit", TodayDate)
-
-/*
-  // Se qualquer uma das entradas for nula, o comportamento não é executado
-  if( entranceTimeResponse && lunchTimeResponse && lunchExitTimeResponse && exitTimeResponse){
+  if ( areEntriesValid() ){
+    createAlarm("Entrance", TodayDate)
+    createAlarm("Lunch", TodayDate)
+    createAlarm("LunchExit", TodayDate)
+    createAlarm("Exit", TodayDate)
 
     Success();
-  }else{
+  } else {
     Failure();
   }
+
+/*
+  
 */
 }
 
