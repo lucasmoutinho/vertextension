@@ -15,14 +15,13 @@ function Failure() {
 function createAlarm(MomentName, TodayDate)
 {
   // Function which creates an alarm for each moment based on the computer date
-  //
-
   // Time to repeat is measured in minuets 
   // So 60 minutes per hour times 24 hours per day times 7 days give us a week
   const INTERVAL_TO_REPEAT = 24*60*7
   const NUMBER_OF_DAYS_OF_THE_WEEK = 7
   const FRIDAY = 0
   const SUNDAY = 0
+
 
   let InputName = MomentName + "AlarmInput" 
   let TimeResponse = document.getElementById(InputName).value
@@ -53,7 +52,6 @@ function createAlarm(MomentName, TodayDate)
   }
 
 
-
 }
 
 function areEntriesValid()
@@ -70,6 +68,7 @@ function areEntriesValid()
     return false
   }
 }
+
 
 function clickHandler(e) {
 
@@ -91,8 +90,35 @@ function clickHandler(e) {
 */
 }
 
+function setInputValues(alarmName, inputName){
+  chrome.alarms.get(alarmName, function (alarm) {
+    if (alarm != null) {
+      let entranceValue = new Date(alarm.scheduledTime)
+      let entranceHour = entranceValue.getHours() + ""
+      if (entranceHour.length == 1) {
+        entranceHour = 0 + entranceHour
+      }
+      let entranceMinute = entranceValue.getMinutes() + ""
+      if (entranceMinute.length == 1) {
+        entranceMinute = 0 + entranceMinute
+      }
+      let entranceInputValue = entranceHour + ':' + entranceMinute
+      document.getElementById(inputName).value = entranceInputValue
+    }
+  })
+}
+
 // On Click
+
+let entranceAlarmName = 'EntranceAlarm_0'
+let lunchAlarmName = 'LunchAlarm_0'
+let lunchExitAlarmName = 'LunchExitAlarm_0'
+let exitAlarmName = 'ExitAlarm_0'
 
 document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('toggleAlarm').addEventListener('click', clickHandler);
+  setInputValues(entranceAlarmName, 'EntranceAlarmInput')
+  setInputValues(lunchAlarmName, 'LunchAlarmInput')
+  setInputValues(lunchExitAlarmName, 'LunchExitAlarmInput')
+  setInputValues(exitAlarmName, 'ExitAlarmInput')
 })
