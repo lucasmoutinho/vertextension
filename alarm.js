@@ -19,7 +19,7 @@ function createAlarm(MomentName, TodayDate)
   // So 60 minutes per hour times 24 hours per day times 7 days give us a week
   const INTERVAL_TO_REPEAT = 24*60*7
   const NUMBER_OF_DAYS_OF_THE_WEEK = 7
-  const FRIDAY = 0
+  const SATURDAY = 6
   const SUNDAY = 0
 
 
@@ -35,19 +35,17 @@ function createAlarm(MomentName, TodayDate)
   }
 
   var count = 0;
-  while (count < NUMBER_OF_DAYS_OF_THE_WEEK) {
-
+  while ( count < NUMBER_OF_DAYS_OF_THE_WEEK ) {
     let AlarmName = MomentName + 'Alarm' + "_" + count
-
-    AlarmDate.setDate( AlarmDate.getDay() + 1)
-
+    
     if ( AlarmDate.getDay() != SUNDAY && AlarmDate.getDay() != SATURDAY ) { // Skip weekends      
       chrome.alarms.create( AlarmName, {
         when: AlarmDate.getTime(), periodInMinutes: INTERVAL_TO_REPEAT
-      });
-      console.log(AlarmDate)
+    });
+    console.log(AlarmDate)
     }
 
+    AlarmDate.setDate( AlarmDate.getDate() + 1)
     count += 1 
   }
 
@@ -69,27 +67,6 @@ function areEntriesValid()
   }
 }
 
-
-function clickHandler(e) {
-
-  let TodayDate = new Date(Date.now())
-
-  if ( areEntriesValid() ){
-    createAlarm("Entrance", TodayDate)
-    createAlarm("Lunch", TodayDate)
-    createAlarm("LunchExit", TodayDate)
-    createAlarm("Exit", TodayDate)
-
-    Success();
-  } else {
-    Failure();
-  }
-
-/*
-  
-*/
-}
-
 function setInputValues(alarmName, inputName){
   chrome.alarms.get(alarmName, function (alarm) {
     if (alarm != null) {
@@ -108,17 +85,29 @@ function setInputValues(alarmName, inputName){
   })
 }
 
-// On Click
 
-let entranceAlarmName = 'EntranceAlarm_0'
-let lunchAlarmName = 'LunchAlarm_0'
-let lunchExitAlarmName = 'LunchExitAlarm_0'
-let exitAlarmName = 'ExitAlarm_0'
+function clickHandler(e) {
+
+  let TodayDate = new Date(Date.now())
+
+  if ( areEntriesValid() ){
+    createAlarm("Entrance", TodayDate)
+    createAlarm("Lunch", TodayDate)
+    createAlarm("LunchExit", TodayDate)
+    createAlarm("Exit", TodayDate)
+
+    Success();
+  } else {
+    Failure();
+  }
+}
+
+// On Click
 
 document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('toggleAlarm').addEventListener('click', clickHandler);
-  setInputValues(entranceAlarmName, 'EntranceAlarmInput')
-  setInputValues(lunchAlarmName, 'LunchAlarmInput')
-  setInputValues(lunchExitAlarmName, 'LunchExitAlarmInput')
-  setInputValues(exitAlarmName, 'ExitAlarmInput')
+  setInputValues( 'EntranceAlarm_0', 'EntranceAlarmInput')
+  setInputValues( 'LunchAlarm_0', 'LunchAlarmInput')
+  setInputValues( 'LunchExitAlarm_0', 'LunchExitAlarmInput')
+  setInputValues( 'ExitAlarm_0', 'ExitAlarmInput')
 })
