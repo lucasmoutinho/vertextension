@@ -14,28 +14,41 @@ function Failure() {
 
 function createAlarm(MomentName, TodayDate)
 {
+  // Function which creates an alarm for each moment based on the computer date
+
   // Time to repeat is measured in minuets 
   // So 60 minutes per hour times 24 hours per day times 7 days give us a week
   const INTERVAL_TO_REPEAT = 24*60*7
 
-  let inputname = MomentName.concat("AlarmInput") 
+  let inputname = MomentName + "AlarmInput" 
   let TimeResponse = document.getElementById(inputname).value
 
   let HourAndMinute = TimeResponse.split(":")
 
-  let AlarmTime = new Date(TodayDate.getFullYear(),TodayDate.getMonth(),TodayDate.getDate(), HourAndMinute[0], HourAndMinute[1],0,0)
+  let AlarmDate = new Date(TodayDate.getFullYear(),TodayDate.getMonth(),TodayDate.getDate(), HourAndMinute[0], HourAndMinute[1],0,0)
 
-  if( TodayDate.getTime() > AlarmTime.getTime() ){
-    AlarmTime.setDate( AlarmTime.getDate() + 1 )
+  if( TodayDate.getTime() > AlarmDate.getTime() ){
+    AlarmDate.setDate( AlarmDate.getDate() + 1 )
   }
 
-  let AlarmName = MomentName.concat('Alarm')
+  var count = 0;
+  while (count < 7) {
+    
+    let AlarmName = MomentName + 'Alarm' + "_" + count
 
-  chrome.alarms.create( AlarmName, {
-    when: AlarmTime.getTime(), periodInMinutes: INTERVAL_TO_REPEAT
-  });
+    AlarmDate.setDate( AlarmDate.getDay() + 1)
 
-  console.log(AlarmTime)
+    if ( AlarmDate.getDay() != 0 && AlarmDate.getDay() != 6) { // Skip weekends      
+      chrome.alarms.create( AlarmName, {
+        when: AlarmDate.getTime(), periodInMinutes: INTERVAL_TO_REPEAT
+      });
+      console.log(AlarmDate)
+    }
+
+    count += 1 
+  }
+
+
 
 }
 
