@@ -1,6 +1,6 @@
 let optionsEntrance = {
   type: "image",
-  title: "Hora de bater o ponto!",
+  title: "Hora de bater o ponto! :)",
   message: "Entre no Ahgora e bata seu ponto!",
   iconUrl: "images/ahgora.jpg",
   imageUrl: "images/start.jpg",
@@ -19,7 +19,7 @@ let optionsLunch = {
 let optionsLunchExit = {
   type: "image",
   title: "Voltando do break!?",
-  message: "Aproveite e bata o ponto!",
+  message: "Não deixe de bater o seu ponto.",
   iconUrl: "images/ahgora.jpg",
   imageUrl: "images/exitlunch.jpg",
   requireInteraction: true

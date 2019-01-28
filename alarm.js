@@ -23,7 +23,7 @@ function clickHandler(e) {
     let entranceArray = entranceTimeResponse.split(":")
     let lunchArray = lunchTimeResponse.split(":")
     let lunchExitArray = lunchExitTimeResponse.split(":")
-    let exitArray = entranceTimeResponse.split(":")
+    let exitArray = exitTimeResponse.split(":")
 
     let todayDate = new Date(Date.now())
 
@@ -53,11 +53,6 @@ function clickHandler(e) {
     console.log(lunchExitAlarmTime)
     console.log(exitAlarmTime)
 
-    let entranceAlarmName = 'EntranceAlarm'
-    let lunchExitAlarmName = 'LunchAlarm'
-    let exitAlarmName = 'LunchExitAlarm'
-    let lunchAlarmName = 'ExitAlarm'
-
     chrome.alarms.create( entranceAlarmName, {
       when: entranceAlarmTime.getTime(), periodInMinutes: 1440
     });
@@ -80,8 +75,35 @@ function clickHandler(e) {
   }
 }
 
+function setInputValues(alarmName, inputName){
+  chrome.alarms.get(alarmName, function (alarm) {
+    if (alarm != null) {
+      let entranceValue = new Date(alarm.scheduledTime)
+      let entranceHour = entranceValue.getHours() + ""
+      if (entranceHour.length == 1) {
+        entranceHour = 0 + entranceHour
+      }
+      let entranceMinute = entranceValue.getMinutes() + ""
+      if (entranceMinute.length == 1) {
+        entranceMinute = 0 + entranceMinute
+      }
+      let entranceInputValue = entranceHour + ':' + entranceMinute
+      document.getElementById(inputName).value = entranceInputValue
+    }
+  })
+}
+
 // On Click
+
+let entranceAlarmName = 'EntranceAlarm'
+let lunchAlarmName = 'LunchAlarm'
+let lunchExitAlarmName = 'LunchExitAlarm'
+let exitAlarmName = 'ExitAlarm'
 
 document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('toggleAlarm').addEventListener('click', clickHandler);
+  setInputValues(entranceAlarmName, 'EntranceAlarmInput')
+  setInputValues(lunchAlarmName, 'LunchAlarmInput')
+  setInputValues(lunchExitAlarmName, 'LunchExitAlarmInput')
+  setInputValues(exitAlarmName, 'ExitAlarmInput')
 })
