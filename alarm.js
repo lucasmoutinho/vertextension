@@ -12,72 +12,51 @@ function Failure() {
   setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 }
 
-function clickHandler(e) {
-  let entranceTimeResponse = document.getElementById('EntranceAlarmInput').value
-  let lunchTimeResponse = document.getElementById('LunchAlarmInput').value
-  let lunchExitTimeResponse = document.getElementById('LunchExitAlarmInput').value
-  let exitTimeResponse = document.getElementById('ExitAlarmInput').value
+function createAlarm(MomentName, TodayDate)
+{
+  // Time to repeat is measured in minuets 
+  // So 60 minutes per hour times 24 hours per day times 7 days give us a week
+  const INTERVAL_TO_REPEAT = 24*60*7
 
+  let inputname = MomentName.concat("AlarmInput") 
+  let TimeResponse = document.getElementById(inputname).value
+
+  let HourAndMinute = TimeResponse.split(":")
+
+  let AlarmTime = new Date(TodayDate.getFullYear(),TodayDate.getMonth(),TodayDate.getDate(), HourAndMinute[0], HourAndMinute[1],0,0)
+
+  if( TodayDate.getTime() > AlarmTime.getTime() ){
+    AlarmTime.setDate( AlarmTime.getDate() + 1 )
+  }
+
+  let AlarmName = MomentName.concat('Alarm')
+
+  chrome.alarms.create( AlarmName, {
+    when: AlarmTime.getTime(), periodInMinutes: INTERVAL_TO_REPEAT
+  });
+
+  console.log(AlarmTime)
+
+}
+
+function clickHandler(e) {
+
+  let TodayDate = new Date(Date.now())
+
+  createAlarm("Entrance", TodayDate)
+  createAlarm("Lunch", TodayDate)
+  createAlarm("LunchExit", TodayDate)
+  createAlarm("Exit", TodayDate)
+
+/*
   // Se qualquer uma das entradas for nula, o comportamento não é executado
   if( entranceTimeResponse && lunchTimeResponse && lunchExitTimeResponse && exitTimeResponse){
-    let entranceArray = entranceTimeResponse.split(":")
-    let lunchArray = lunchTimeResponse.split(":")
-    let lunchExitArray = lunchExitTimeResponse.split(":")
-    let exitArray = entranceTimeResponse.split(":")
-
-    let todayDate = new Date(Date.now())
-
-    let entranceAlarmTime = new Date(todayDate.getFullYear(),todayDate.getMonth(),todayDate.getDate(),entranceArray[0],entranceArray[1],0,0)
-    let lunchAlarmTime = new Date(todayDate.getFullYear(),todayDate.getMonth(),todayDate.getDate(),lunchArray[0],lunchArray[1],0,0)
-    let lunchExitAlarmTime = new Date(todayDate.getFullYear(),todayDate.getMonth(),todayDate.getDate(),lunchExitArray[0],lunchExitArray[1],0,0)
-    let exitAlarmTime = new Date(todayDate.getFullYear(),todayDate.getMonth(),todayDate.getDate(),exitArray[0], exitArray[1],0,0)
-    
-    if(todayDate.getTime() > entranceAlarmTime.getTime()){
-      entranceAlarmTime.setDate(entranceAlarmTime.getDate() + 1)
-    }
-
-    if(todayDate.getTime() > lunchAlarmTime.getTime()){
-      lunchAlarmTime.setDate(lunchAlarmTime.getDate() + 1)
-    }
-
-    if(todayDate.getTime() > lunchExitAlarmTime.getTime()){
-      lunchExitAlarmTime.setDate(lunchExitAlarmTime.getDate() + 1)
-    }
-
-    if(todayDate.getTime() > exitAlarmTime.getTime()){
-      exitAlarmTime.setDate(exitAlarmTime.getDate() + 1)
-    }
-
-    console.log(entranceAlarmTime)
-    console.log(lunchAlarmTime)
-    console.log(lunchExitAlarmTime)
-    console.log(exitAlarmTime)
-
-    let entranceAlarmName = 'EntranceAlarm'
-    let lunchExitAlarmName = 'LunchAlarm'
-    let exitAlarmName = 'LunchExitAlarm'
-    let lunchAlarmName = 'ExitAlarm'
-
-    chrome.alarms.create( entranceAlarmName, {
-      when: entranceAlarmTime.getTime(), periodInMinutes: 1440
-    });
-
-    chrome.alarms.create( exitAlarmName, {
-      when: exitAlarmTime.getTime(), periodInMinutes: 1440
-    });
-
-    chrome.alarms.create( lunchAlarmName, {
-      when: lunchAlarmTime.getTime(), periodInMinutes: 1440
-    });
-
-    chrome.alarms.create(lunchExitAlarmName, {
-      when: lunchExitAlarmTime.getTime(), periodInMinutes: 1440
-    });
 
     Success();
   }else{
     Failure();
   }
+*/
 }
 
 // On Click
