@@ -3,7 +3,7 @@
   "name": "VertAlerts",
   "description": "An extension to notify users to 'hit the spot'",
   "version": "1.4",
-  "author": "Lucas Moutinho and Thiago Barros",
+  "author": "Lucas Moutinho, Thiago Barros and Thiago Pinho",
 
   "background": {
     "scripts": ["background.js"],
