@@ -98,7 +98,7 @@ chrome.notifications.onClicked.addListener(function () {
 // Reminder Buttons Click
 chrome.notifications.onButtonClicked.addListener(function (notificationId) {
   let ReminderDate = new Date(Date.now())
-  ReminderDate.setMinutes(ReminderDate.getMinutes() + 1)
+  ReminderDate.setMinutes(ReminderDate.getMinutes() + 15)
   chrome.notifications.clear(notificationId)
   chrome.alarms.create("ReminderAlarm", {
     when: ReminderDate.getTime()
