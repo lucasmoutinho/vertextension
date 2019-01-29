@@ -104,12 +104,4 @@ function clickHandler(e) {
   }
 }
 
-// On Click
 
-document.addEventListener('DOMContentLoaded', function () {
-  document.getElementById('toggleAlarm').addEventListener('click', clickHandler);
-  setInputValues('EntranceAlarm_0', 'EntranceAlarmInput')
-  setInputValues('LunchAlarm_0', 'LunchAlarmInput')
-  setInputValues('LunchExitAlarm_0', 'LunchExitAlarmInput')
-  setInputValues('ExitAlarm_0', 'ExitAlarmInput')
-})
