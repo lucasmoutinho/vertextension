@@ -41,8 +41,8 @@ function createAlarm(MomentName, TodayDate)
     if ( AlarmDate.getDay() != SUNDAY && AlarmDate.getDay() != SATURDAY ) { // Skip weekends      
       chrome.alarms.create( AlarmName, {
         when: AlarmDate.getTime(), periodInMinutes: INTERVAL_TO_REPEAT
-    });
-    console.log(AlarmDate)
+      });
+      console.log(AlarmDate)
     }
 
     AlarmDate.setDate( AlarmDate.getDate() + 1)
