@@ -17,6 +17,10 @@ let optionsLunch = {
   message: "Não esqueça de bater o ponto antes de sair!",
   iconUrl: "images/ahgora.jpg",
   imageUrl: "images/lunch.jpg",
+  buttons: [{
+    title: "Clique aqui para adiar 15 minutos...",
+    iconUrl: "images/timer.png"
+  }],
   requireInteraction: true
 };
 
@@ -26,6 +30,10 @@ let optionsLunchExit = {
   message: "Não deixe de bater o seu ponto.",
   iconUrl: "images/ahgora.jpg",
   imageUrl: "images/exitlunch.jpg",
+  buttons: [{
+    title: "Clique aqui para adiar 15 minutos...",
+    iconUrl: "images/timer.png"
+  }],
   requireInteraction: true
 };
 
@@ -35,6 +43,10 @@ let optionsExit = {
   message: "Não esqueça de bater o ponto na saída!",
   iconUrl: "images/ahgora.jpg",
   imageUrl: "images/end.jpg",
+  buttons: [{
+    title: "Clique aqui para adiar 15 minutos...",
+    iconUrl: "images/timer.png"
+  }],
   requireInteraction: true
 };
 
@@ -43,7 +55,7 @@ let optionsReminder = {
   title: "Passaram-se 15 minutos...",
   message: "Já não está na hora de bater o ponto?",
   iconUrl: "images/ahgora.jpg",
-  imageUrl: "images/end.jpg",
+  imageUrl: "images/reminder.jpg",
   buttons: [{
     title: "Ainda não... mais 15 minutos!",
     iconUrl: "images/timer.png"
