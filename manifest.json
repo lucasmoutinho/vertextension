@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "VertAlerts",
   "description": "An extension to notify users to 'hit the spot'",
-  "version": "1.4",
+  "version": "1.5",
   "author": "Lucas Moutinho, Thiago Barros and Thiago Pinho",
 
   "background": {
@@ -14,18 +14,18 @@
     "default_title": "VertAlerts",
     "default_popup": "popup.html",
     "default_icon": {
-      "16": "images/simbol16.png",
-      "32": "images/simbol32.png",
-      "48": "images/simbol48.png",
-      "128": "images/simbol128.png"
+      "16": "icons/ICON16.png",
+      "32": "icons/ICON32.png",
+      "48": "icons/ICON48.png",
+      "128": "icons/ICON128.png"
     }
   },
 
   "icons": {
-    "16": "images/simbol16.png",
-    "32": "images/simbol32.png",
-    "48": "images/simbol48.png",
-    "128": "images/simbol128.png"
+    "16": "icons/ICON16.png",
+    "32": "icons/ICON32.png",
+    "48": "icons/ICON48.png",
+    "128": "icons/ICON128.png"
   },
 
   "permissions": [

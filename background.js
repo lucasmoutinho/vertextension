@@ -1,9 +1,16 @@
+
+'use strict'
+
 let optionsEntrance = {
   type: "image",
   title: "Hora de bater o ponto! :)",
   message: "Entre no Ahgora e bata seu ponto!",
   iconUrl: "images/ahgora.jpg",
   imageUrl: "images/start.jpg",
+  buttons: [{
+    title: "Clique aqui para adiar 15 minutos...",
+    iconUrl: "images/timer.png"
+  }],
   requireInteraction: true
 };
 
@@ -13,6 +20,10 @@ let optionsLunch = {
   message: "Não esqueça de bater o ponto antes de sair!",
   iconUrl: "images/ahgora.jpg",
   imageUrl: "images/lunch.jpg",
+  buttons: [{
+    title: "Clique aqui para adiar 15 minutos...",
+    iconUrl: "images/timer.png"
+  }],
   requireInteraction: true
 };
 
@@ -22,6 +33,10 @@ let optionsLunchExit = {
   message: "Não deixe de bater o seu ponto.",
   iconUrl: "images/ahgora.jpg",
   imageUrl: "images/exitlunch.jpg",
+  buttons: [{
+    title: "Clique aqui para adiar 15 minutos...",
+    iconUrl: "images/timer.png"
+  }],
   requireInteraction: true
 };
 
@@ -31,6 +46,23 @@ let optionsExit = {
   message: "Não esqueça de bater o ponto na saída!",
   iconUrl: "images/ahgora.jpg",
   imageUrl: "images/end.jpg",
+  buttons: [{
+    title: "Clique aqui para adiar 15 minutos...",
+    iconUrl: "images/timer.png"
+  }],
+  requireInteraction: true
+};
+
+let optionsReminder = {
+  type: "image",
+  title: "Passaram-se 15 minutos...",
+  message: "Já não está na hora de bater o ponto?",
+  iconUrl: "images/ahgora.jpg",
+  imageUrl: "images/reminder.jpg",
+  buttons: [{
+    title: "Mais 15 minutos!",
+    iconUrl: "images/timer.png"
+  }],
   requireInteraction: true
 };
 
@@ -44,21 +76,31 @@ let lunchExitTime = new Date(todayDate.getFullYear(), todayDate.getMonth(), toda
 // On Alarm
 chrome.alarms.onAlarm.addListener(function (alarm) {
   let AlarmOptions = alarm.name.split("_")[0]
-  if (AlarmOptions === 'EntranceAlarm'){
-    chrome.notifications.create(optionsEntrance);
+  if (AlarmOptions === 'EntranceAlarm') {
+    chrome.notifications.create("optionsEntrance",optionsEntrance);
+  } else if (AlarmOptions === 'LunchAlarm') {
+    chrome.notifications.create("optionsLunch",optionsLunch);
+  } else if (AlarmOptions === 'LunchExitAlarm') {
+    chrome.notifications.create("optionsLunchExit",optionsLunchExit);
+  } else if (AlarmOptions === 'ExitAlarm') {
+    chrome.notifications.create("optionsExit)",optionsExit);
   }
-  else if (AlarmOptions === 'LunchAlarm') {
-    chrome.notifications.create(optionsLunch);
-  }
-  else if (AlarmOptions === 'LunchExitAlarm') {
-    chrome.notifications.create(optionsLunchExit);
-  }
-  else if (AlarmOptions === 'ExitAlarm') {
-    chrome.notifications.create(optionsExit);
+  else if (AlarmOptions === 'ReminderAlarm') {
+    chrome.notifications.create("optionsReminder",optionsReminder);
   }
 });
 
 // Notifications CLick
 chrome.notifications.onClicked.addListener(function () {
   chrome.tabs.create({ 'url': "https://www.ahgora.com.br/batidaonline" })
+});
+
+// Reminder Buttons Click
+chrome.notifications.onButtonClicked.addListener(function (notificationId) {
+  let ReminderDate = new Date(Date.now())
+  ReminderDate.setMinutes(ReminderDate.getMinutes() + 15)
+  chrome.notifications.clear(notificationId)
+  chrome.alarms.create("ReminderAlarm", {
+    when: ReminderDate.getTime()
+  });
 });
