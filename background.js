@@ -1,3 +1,6 @@
+
+'use strict'
+
 let optionsEntrance = {
   type: "image",
   title: "Hora de bater o ponto! :)",
@@ -44,21 +47,20 @@ let lunchExitTime = new Date(todayDate.getFullYear(), todayDate.getMonth(), toda
 // On Alarm
 chrome.alarms.onAlarm.addListener(function (alarm) {
   let AlarmOptions = alarm.name.split("_")[0]
-  if (AlarmOptions === 'EntranceAlarm'){
+  if (AlarmOptions === 'EntranceAlarm') {
     chrome.notifications.create(optionsEntrance);
-  }
-  else if (AlarmOptions === 'LunchAlarm') {
+  } else if (AlarmOptions === 'LunchAlarm') {
     chrome.notifications.create(optionsLunch);
-  }
-  else if (AlarmOptions === 'LunchExitAlarm') {
+  } else if (AlarmOptions === 'LunchExitAlarm') {
     chrome.notifications.create(optionsLunchExit);
-  }
-  else if (AlarmOptions === 'ExitAlarm') {
+  } else if (AlarmOptions === 'ExitAlarm') {
     chrome.notifications.create(optionsExit);
   }
 });
 
 // Notifications CLick
 chrome.notifications.onClicked.addListener(function () {
-  chrome.tabs.create({ 'url': "https://www.ahgora.com.br/batidaonline" })
+  chrome.tabs.create({
+    'url': "https://www.ahgora.com.br/batidaonline"
+  })
 });
