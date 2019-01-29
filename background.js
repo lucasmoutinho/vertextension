@@ -1,3 +1,6 @@
+
+'use strict'
+
 let optionsEntrance = {
   type: "image",
   title: "Hora de bater o ponto! :)",
@@ -73,20 +76,17 @@ let lunchExitTime = new Date(todayDate.getFullYear(), todayDate.getMonth(), toda
 // On Alarm
 chrome.alarms.onAlarm.addListener(function (alarm) {
   let AlarmOptions = alarm.name.split("_")[0]
-  if (AlarmOptions === 'EntranceAlarm'){
-    chrome.notifications.create(optionsEntrance);
-  }
-  else if (AlarmOptions === 'LunchAlarm') {
-    chrome.notifications.create(optionsLunch);
-  }
-  else if (AlarmOptions === 'LunchExitAlarm') {
-    chrome.notifications.create(optionsLunchExit);
-  }
-  else if (AlarmOptions === 'ExitAlarm') {
-    chrome.notifications.create(optionsExit);
+  if (AlarmOptions === 'EntranceAlarm') {
+    chrome.notifications.create("optionsEntrance",optionsEntrance);
+  } else if (AlarmOptions === 'LunchAlarm') {
+    chrome.notifications.create("optionsLunch",optionsLunch);
+  } else if (AlarmOptions === 'LunchExitAlarm') {
+    chrome.notifications.create("optionsLunchExit",optionsLunchExit);
+  } else if (AlarmOptions === 'ExitAlarm') {
+    chrome.notifications.create("optionsExit)",optionsExit);
   }
   else if (AlarmOptions === 'ReminderAlarm') {
-    chrome.notifications.create(optionsReminder);
+    chrome.notifications.create("optionsReminder",optionsReminder);
   }
 });
 
@@ -95,10 +95,11 @@ chrome.notifications.onClicked.addListener(function () {
   chrome.tabs.create({ 'url': "https://www.ahgora.com.br/batidaonline" })
 });
 
-// Buttons Click
-chrome.notifications.onButtonClicked.addListener(function () {
+// Reminder Buttons Click
+chrome.notifications.onButtonClicked.addListener(function (notificationId) {
   let ReminderDate = new Date(Date.now())
   ReminderDate.setMinutes(ReminderDate.getMinutes() + 1)
+  chrome.notifications.clear(notificationId)
   chrome.alarms.create("ReminderAlarm", {
     when: ReminderDate.getTime()
   });
