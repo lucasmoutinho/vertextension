@@ -1,8 +1,6 @@
 // Press enter on last input to click submit button 
 
 var input = document.getElementById('ExitAlarmInput')
-console.log(document)
-console.log(input)
 
 input.addEventListener("keyup", function(event) {
   event.preventDefault();
