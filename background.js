@@ -60,7 +60,7 @@ let optionsReminder = {
   iconUrl: "images/ahgora.jpg",
   imageUrl: "images/reminder.jpg",
   buttons: [{
-    title: "Ainda não... mais 15 minutos!",
+    title: "Mais 15 minutos!",
     iconUrl: "images/timer.png"
   }],
   requireInteraction: true
